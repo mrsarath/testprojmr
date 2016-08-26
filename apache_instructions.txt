@@ -1,0 +1,58 @@
+Apache 
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Q:How to see server current Active Configurations and Status
+
+Enable mod_info, mod_status modules in httpd.conf
+
+Add the following in httpd.conf
+
+include /extras/httpd-info.conf
+
+
+Add the following in httpd-info.conf file
+<Location /server-info>
+    SetHandler server-info    
+</Location>
+
+<Location /server-status>
+    SetHandler server-status
+</Location>
+
+##########################################
+
+Q:How to change ThreadPerChild setting
+
+@@@@ WINDOWS @@@@
+Enable mpm_winnt modules in httpd.conf
+
+Add the following in httpd.conf file
+
+include /extras/httpd-mpm.conf
+
+Add following in httpd-mpm.conf file
+
+<IfModule mpm_winnt_module>
+    ThreadsPerChild      150
+</IfModule>
+#######################################
+
+Q:Command to list every Module that is compiled into the server, like mpm
+
+>./httpd -l
+
+#######################################
+
+
+Q: Request Entity too large error with Apache/php
+
+Increase following in httpd.conf
+
+LimitRequestBody 20480000
+LimitRequestFields 50000 
+LimitRequestFieldSize 4956800
+LimitRequestLine 6552000
+
+
+################################################

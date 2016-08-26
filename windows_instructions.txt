@@ -1,0 +1,85 @@
+---
+Java
+
+see the Java Virtual Machine Process Status Tool
+
+>jps -ml
+
+------
+
+Check port details
+
+netstat -an|find "<portnumber>"
+
+netstat -a
+
+netstat -ab   -> for complete progam names
+
+
+----
+
+
+See all environment variables
+
+>SET
+
+Set environment variables
+
+>SETX 
+
+-------------------
+
+FTP in WINDOWS
+
+>ftp hostname
+
+cd - changedirectory, dir - list files
+
+Upload file to the Server - copy to the current folder
+
+ftp> put local_file_path
+
+-------------
+
+Uninstall Windows Service
+
+if hve SC.exe tool
+
+>sc delete <service-name>
+
+----------------------
+
+Zip the selected files in subfolders with folder path remaining using 7-Zip
+
+C:\Users\Administrator\Desktop>"C:\Program Files\7-zip\7z.exe" a outfilename.7z -r folder\*.conf
+
+-------------------------
+
+See Task list (know Process ID)
+>tasklist
+
+Force kill a process
+
+>TASKKILL /F /IM <processname> /T
+>TASKKILL /PID <processname> /F 
+
+Or use 'PowerShell software'
+
+----------------------------------------------------------------------------------------------
+NETWORKING
+
+Reset TCP/IP Network
+
+>netsh int ip reset c:\resetlogfile.txt
+
+Flush or Reset DNS Entries
+
+>ipconfig /flushdns
+
+------------------
+Check connect to host and port
+
+>telnet hostip portnumber
+- click enter 4 times
+
+--------------------

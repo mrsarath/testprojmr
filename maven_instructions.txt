@@ -1,0 +1,53 @@
+
+Purge Local Repository - Purpose is to Purge (delete and optionally re-resolve) artifacts from the local maven repository.
+
+goal: dependency:purge-local-repository
+
+------------
+
+See Dependency Tree for a Project
+
+run the Goal : dependency:tree -Dverbos
+
+-----------
+Install into Local Respository
+
+>mvn install:install-file -Dfile=C:\opt\conn.jar -DgroupId=com.aeroscout.medtrac -DartifactId=connector -Dversion=2.4.7 -Dpackaging=jar
+
+---------
+Test
+
+Test single Test Case
+>mvn -Dtest=TestCaseName test
+
+
+########################################################################################
+               ANT
+########################################################################################
+
+Bulding Project with Ant
+
+>ant clean|release|installr|test
+
+
+Android Project
+---------------------
+Build Debug version
+
+>Go to Project Home folder
+>ant clean
+>ant debug
+
+Build Release version
+
+>Go to Project Home folder
+>ant clean
+>ant debug
+
+Run Tests from Test Project
+
+test-proj> adb shell am instrument -w com.stanleyhealthcare.minf.tests/android.test.InstrumentationTestRunner
+
+
+
+

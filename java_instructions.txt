@@ -1,0 +1,70 @@
+SSL
+----------------
+KeyTool Command:
+
+Create SSL Keystore and the New Certificate 
+
+#C:\Progra~1\Java\jdk1.6.0_45\bin\keytool -genkey -alias mobileview -keyalg RSA -validity 30 -keystore .\filename.keystore
+
+Full command
+
+#C:\Progra~1\Java\jdk1.6.0_45\bin\keytool -genkey -alias mobileview -keyalg RSA -validity 30 -keystore .\mobileview.keystore -storepass mvpass123$ -dname "CN=SGP-SXM0817-1, OU=mobileview, O=aeroscout, L=Singapore, S=Singapore, C=SG"
+-------
+Read a kestore file
+
+#C:\Progra~1\Java\jdk1.6.0_45\bin\keytool -list -v -keystore filename.keystore
+-------
+Delete a certificate from Keystore
+
+#C:\Progra~1\Java\jdk1.6.0_45\bin\keytool -delete  -alias mobileview -keystore .\mobileview.keystore
+
+-------
+Check the Certificate chain of a Web site
+
+#openssl s_client -connect mail.google.com:443
+-------
+#########################################################
+                    JSP
+#########################################################
+
+1) Declaration statements <%! only for jsp class Init , Destroy code like database objects initialization etc., 
+use jspInit(), jspDestroy() function overrides.
+
+#########################################################
+                   JAXP
+#########################################################
+Xalan - is JAXP implementation
+
+JAXP - providing Parsing Interfaces like DOM, SAX (simple api for xml parsing)
+
+JAXP - provides XSLT interface
+
+-----------
+Apache Commons Net - implements the client side of many basic Internet protocols
+
+
+MEDTRAC
+-----------------------
+JAXP - Xalan (SAX, DOM, XSLT)
+  org.xml.sax - for Parsing Configuration Files
+  
+Apahce Commons Net -
+  commons.net.ftp -> To send Reports through ftp
+  common.net.httpclient -> To send Reports through http
+  
+Java Mail -
+XmlGraphics - 
+
+
+MOBILE VIEW
+------------------------------
+RTLS - Real Time Location System - Provider
+Unified Asset Visibility Solutions Using Standard wi-fi networks.
+Track and manage the Location, Condition, Status of Mobile assets and People.
+Wifi based RFID tags.
+Asset Tracking Solution
+
+Tags provide asset visibility by sending regular, short bursts of data 
+over the Wi-Fi network transmitting the location, status and condition of the asset.
+
+

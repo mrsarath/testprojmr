@@ -1,0 +1,37 @@
+
+
+Dependancy Injection  
+
+( constructor Injection - constructor-arg
+  inner bean
+
+  <property>
+  <list> <ref bean="">
+
+Aspect oriented programming
+
+Annotation
+
+ApplicationContext
+
+XMLBean FActory - 
+
+Autowiring - ComponentScan - @AutoWired, @Resource, @PostConstruct, @PreDestroy
+
+AutoWire="ByName" , "byType"
+
+Bean Scopes:  singleton, Prototype (evrery request), Request, Session, Global session
+
+ApplicationContextAware
+
+BeanDefinitionInheritance
+
+LifeCycle - IntializingBean, - afterPropertiesSet, destroy , init-method=""
+
+
+BeanPostProcessor - 
+
+
+
+
+

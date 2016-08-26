@@ -1,0 +1,151 @@
+ 
+ 
+ 
+ /* alert.setAdditionalProperties(splitAdditionalData(result.additionalData));		
+		alert.setCorrectiveActions(toCorrectiveActions(result.correctiveActionDTO));
+		alert.setCorrectiveActions(toCorrectiveActions(result.correctiveActions));				
+		alert.setTelemetry(result.telemetry);			
+		alert.setCorrectiveActionEnabled(result.eventSpec.correctiveActionEnabledForEvent);
+		alert.setCorrectiveActionRequired(result.eventSpec.correctiveActionMandatoryForDismiss);
+		alert.setAssetApplicationId(result.asset.applicationId); */
+		
+		
+		
+
+        System.out.println("SETLOGINSTATUS :" + loginStatus.getMvCookies().get("JSESSIONID"));
+
+
+System.out.println("##### STORING NEW COOKIE : " + cookie.getName()+"="+cookie.getValue() + " FROM " + getClass());
+
+--Store session  Cookie and send it back in the Request for Alerting Server Requests
+--Sore Cookie changes for SOAP Web Service calls
+
+
+
+
+public static void storeCookieHeader(List<HeaderProperty> respHeaders, List<HeaderProperty> headers) {    	
+    	        
+        for(int ix=0; ix<respHeaders.size(); ix++) { 
+            HeaderProperty hp = (HeaderProperty)respHeaders.get(ix);            
+            
+            if (hp!=null && "Set-Cookie".equals(hp.getKey())) {                
+                
+                boolean found=false;
+                String cookieString = hp.getValue();
+            	cookieString = cookieString.substring(0, cookieString.indexOf(";") );                                                        
+            	
+            	//If cookie in headers Replace It , if not Add 
+                for (int iy=0; iy<headers.size(); iy++) {
+                    HeaderProperty cookieProperty = (HeaderProperty) headers.get(iy);
+                    
+                    if ("Cookie".equals(cookieProperty.getKey())) {                            	
+                        headers.set(iy, new HeaderProperty("Cookie", cookieString));
+                        found = true;
+                    }
+                }                
+                
+                if (!found)
+                    headers.add(new HeaderProperty("Cookie", cookieString));                
+            }
+        }     
+    	
+    }
+
+
+-------------------
+
+protected void storeCookieHeader(List<HeaderProperty> respHeaders) {				
+		
+		if (respHeaders == null)
+			return;
+		
+		HttpCookie cookie = HttpCookie.parse(header)
+		
+		for(int ix=0; ix<respHeaders.size(); ix++) { 
+            HeaderProperty hp = (HeaderProperty)respHeaders.get(ix);            
+            
+            if (hp!=null && "Set-Cookie".equals(hp.getKey())) {            	
+                
+                boolean found=false;
+                String cookieString = hp.getValue();
+            	cookieString = cookieString.substring(0, cookieString.indexOf(";") );                                                        
+            	
+            	//If cookie in headers Replace It , if not Add 
+                for (int iy=0; iy<headers.size(); iy++) {
+                    HeaderProperty cookieProperty = (HeaderProperty) headers.get(iy);
+                    
+                    if ("Cookie".equals(cookieProperty.getKey())) {                            	
+                        headers.set(iy, new HeaderProperty("Cookie", cookieString));
+                        found = true;
+                    }
+                }                
+                
+                if (!found)
+                    headers.add(new HeaderProperty("Cookie", cookieString));
+                
+                System.out.println("##### STORING NEW COOKIE : " + cookieString + " FROM " + getClass());
+                
+                // Copy into LoginStatus
+                if (cookieString.contains("=")) {
+            	    String arr[] = cookieString.split("=");    
+            	    loginStatus.getMvCookies().put(arr[0], arr[1]);
+            	}
+                
+            }
+        }    
+	}
+
+
+
+----------------------------------------------
+
+
+ public void storeCookieHeader(List respHeaders, List<HeaderProperty> headers) {
+    	
+	 for(int ix=0; ix<headers.size(); ix++) { 
+         HeaderProperty hp = (HeaderProperty)headers.get(ix);                    
+         System.out.println("#### EVENTAPI -  SOAP REQUEST Header"+ix+"="+hp.getKey()+" / "+hp.getValue()); 
+     }
+	 
+    	boolean cookieinresponse = false;
+        
+        for(int ix=0; ix<respHeaders.size(); ix++) { 
+            HeaderProperty hp = (HeaderProperty)respHeaders.get(ix);                    
+            
+            if (hp!=null && hp.getKey()!=null && hp.getValue()!=null)
+                System.out.println("EVENTAPI - SOAP RESPONSE  Header"+ix+"="+hp.getKey()+" / "+hp.getValue());
+            
+            if (hp!=null && "Set-Cookie".equals(hp.getKey())) {
+            	cookieinresponse = true;
+                //System.out.println("#### SOAP RESPONSE LOCATORAPI Header"+ix+"="+hp.getKey()+" / "+hp.getValue());
+                
+                boolean found=false;
+                String cookieString = hp.getValue();
+            	cookieString = cookieString.substring(0, cookieString.indexOf(";") );                                                        
+            	
+            	//If cookie in headers Replace It , if not Add 
+                for (int iy=0; iy<headers.size(); iy++) {
+                    HeaderProperty cookieProperty = (HeaderProperty) headers.get(iy);
+                    
+                    if ("Cookie".equals(cookieProperty.getKey())) {                            	
+                        headers.set(iy, new HeaderProperty("Cookie", cookieString));
+                        found = true;
+                    }
+                }
+                System.out.println("EVENTAPI - FINAL STRING SET TO HEADER:" + cookieString + ":");
+                
+                if (!found)
+                    headers.add(new HeaderProperty("Cookie", cookieString));
+            }
+        }             
+    	
+    }
+
+
+
+------------------
+
+
+for (String cookie : loginStatus.getMvCookies().values()) {				
+			    headers.add(new HeaderProperty("Cookie", cookie));
+			}

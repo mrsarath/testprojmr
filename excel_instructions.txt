@@ -1,0 +1,47 @@
+
+1)Copy a value of cell into a range of cells or columns.
+  Select Cell
+  There is a + button in right bottom of the cell, click and drag to the range of cells
+  
+2)Set a formula to a range of cells
+  Select range of cells
+  Enter the formula
+  Press Ctrl + Enter
+  
+3)Copy only formatting of cell like color, border etc to another cell
+  Select the Cell
+  There will be a Format Painter special button beside the Copy, Pase buttons, Double click on it.
+  Copy (Ctrl + V) on the Cells where you want to copy.
+  
+4)
+    A    B    C
+    1    A1   A2
+    2    A2   A2
+    3    A3   A2
+    4    A4   A2
+    
+  B - Relative cell references change from row to row. (Formula: A1)
+  C - Callout 2 Absolute cell reference always refers to cell A2. (Formula: $A$2)
+  
+  
+5) Writing Macro
+
+   -Click Office button and then Excel Options.
+   -On Popular tab, select 'show Developer tab' option
+   -Open Trust Center tab, on Trust center settings select
+    'Enable all macros'
+   -Now you can see 'Developer' Menu item
+   -On that click on 'Record Macro'
+   -Record your Macro, and then click on 'Stop recording Macro'
+   - To Edit exisitng Macros click on 'Macros' and then Edit
+   
+6) Hide/Unhide rows, columns, Sheet, Workbook
+
+   -To hide rows, columns, click on Home mentu Format option
+   -To hide Workbook click on 'View' menu, hide/unhide options
+ 
+   
+7) Compare Two Columns, find in One Column the Extra Records which dont find in Column Two
+   -Create New Column, 
+   -On first Row of New Column Type this formula: =IF(NOT(ISERROR(MATCH(B1,$A$1:$A$81,0))),"",B1)
+   -Copy the Row value to all the Rows for New Column

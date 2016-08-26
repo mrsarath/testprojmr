@@ -1,0 +1,853 @@
+ start extractor:
+
+ go to /opt/..../apps 
+ > extractor/extractor
+
+stop extractor: 
+ go to /opt/..../apps 
+ > ./see
+ - get process ids
+
+ > kill <processid>
+
+apache start:
+ > service httpd start
+
+ > /etc/rc.d/apache2 start | stop
+
+service tomcat5 restart
+
+-----------
+see cpu usage - running process
+
+> top
+
+Shift + f key -> show sort options
+Select 'n' -> sort by memory
+------------------------
+Find free memory and used memory ( in MB)
+>free -m
+
+---------
+Find Max memory allowed for each Process by the OS (32 bit)
+
+>ulimit -a
+-------------
+
+kill process
+
+>kill <id>
+
+force kill process
+
+>kill -9 <id>
+
+kill with name
+
+>pkill <partial name>
+
+----
+
+activemq start
+
+> /etc/rc.d/activemq-instance-mtc start|stop
+
+----
+
+
+linux commands
+-----------------------------------
+ 
+ move             -   mv src dest
+ copy             -   cp src dest
+ apache restart   -   /usr/sbin/apache2ctl restart
+ symbolic link to directory-   ln -s  src newlink
+ 
+ ------------------------------------
+ create directory -   mkdir <dirname>
+ 
+ ------
+ Make directory and subdirectories at a time
+ 
+ #mkdir -p src/main/java/hello
+ 
+ ------------------------------------
+ see file changes live -  continuously
+ >tail -f filename
+
+-----------
+
+Copy directory and its files
+
+>cp -avr
+
+-a - copy attributes
+-v - show verbose output
+
+-p - overwrite with Source file permissions/owenership in case of existing file
+
+----
+root user ever -f dont work use the following, before cp
+
+>unalias cp
+-----------------
+Copy without overwriting existing files
+
+>rsync --ignore-existing --recursive ./manager /opt/medtrac/dhl/
+
+-----
+
+
+copy from a remote machine to my machine:
+scp user@192.168.1.100:/home/file.txt /home/file.txt
+
+copy from my machine to a remote machine:
+scp /home/file.txt user@192.168.1.100:/home/file.txt
+
+copy all file*.txt from a remote machine to my machine (file01.txt, file02.txt, etc.; note the quotation marks:
+scp "user@192.168.1.100:/home/file*.txt" /home/file.txt
+
+copy a directory from a remote machien to my machine:
+scp -r user@192.168.1.100:/home/files /home/.
+tail
+
+----
+
+secure files copy from one machine to another
+
+
+>scp -r -q filename username@HOST:destination/folder/path
+
+-r all files,  -q queit
+
+------------
+
+copy text from line x to y from a file to another file
+
+>sed -n 'x,yp' filename > tonewfilename
+
+------------------------------
+
+
+Delete directory and files in it
+
+> rm -rf <directoryname>/
+
+delete empty directory
+
+> rd <directoryname>
+
+delete files older than a date
+
+>find /path/to/files* -mtime +5 -exec rm {} \;
+
+------
+
+- netstat -na | grep xxx
+
+-------------------------
+
+To download file from url (website)
+
+>wget http://url/file --http-user=user --http-password=
+
+
+-----------------------------------------------------------
+ZIP
+
+> zip zipfilename doc1 doc2
+
+Zip all files in directory
+> zip zipfilename *
+
+Zip a directory
+> zip -r zipfilename direcoty1 directory2 ...
+
+   -> option -9 for more compression
+   -> zip command dont delete the original files
+
+Zip all files and subdirectories
+> zip -r zipfile .
+
+---------
+Zip all in a  folder excluding one or more subfolders
+
+>zip -r filename.zip ./folder -x *subfolder*
+
+>zip -r filename.zip folder/* -x folder/sub1\* folder/sub2\*
+---------
+View files in zip file
+
+>less zipfile
+--------
+
+Unzip to current directory
+
+>unzip filename
+
+specify directory
+
+>unzip filename -d todirpath
+
+---------------------------------
+
+reading bz2 files
+
+>  bzless  <filename>
+
+reading gz files
+
+>  zless  <filename>
+
+------------------------------
+zip files using gun zip
+
+>gzip > file.gz
+
+you can also pipe output from other commands - example: >any command | gzip filename.gz 
+
+------
+unzip gz files using gun zip
+
+> gunzip -c <filename>.gz > filename.xxx
+
+-c optional which keeps compressed version (otherwise deleted) and write to standard out where you can write to file using '> filename.xxx'
+------
+unpack or install gz file
+>gunzip filename.gz
+
+Install  Software in tar.gz format
+>tar -xvzf filename.gz
+
+package management utility and software installation command (RPM files)
+
+cd /dir/to/install/
+#rpm -ivh filename.rpm
+
+List all installed Packages in the system
+
+>rpm -qa | less  OR >rpm -qa <packagename>
+
+Get packages or softwares from internet
+>First install Yum package and can use yum to install softwares
+
+
+--------------------------------
+tar
+
+zip using tar (zip with ownership and permissions of files)
+
+>tar -cvzf filename.tar.gz directory_to_compress/
+
+tar and gz multiple directories
+>tar -cvzff myTar.tar dir1 dir2 dir3 dir4
+
+---
+
+Find and zip only directories without files
+
+>find ./folder -type d | xargs tar -cvzf filename.tar.gz --no-recursion
+
+
+Unzip tar or gz or tgz files
+
+>tar -xvzf <filename> -C /desired/path
+
+-----
+Look what is in tar files
+
+>tar -tvf filename.tar
+
+look only 1 level
+>tar tvf scripts.tar | awk -F/ '{if (NF<1) print }'
+
+Look what is in tar.gz file
+
+>tar -ztvf file.tar.gz
+
+--------
+
+split a file
+>split -b 3072m source_file destfile_part_
+
+join files
+>cat file1 file2 > target_file
+
+----------------------------------------
+
+Find or filter files in subdirectories and zip the files
+
+>find some/dir -name filename.txt | zip -@ outfile.zip
+
+
+
+--------
+
+Find files in subdirectories and sort the files by date
+
+>find /path/to/dir -type f -print0 | xargs -0 ls -lrt
+
+--- 
+Find File Count under a Directory 
+
+ls -1 dirname | wc -l
+
+----
+Find last x matching lines in a file
+
+>grep 'searchtext' /file/path | tail -x
+
+----------
+Search and display all lines matching text in a file, and show few lines before and after the match.
+
+>grep -A 5 "text to search" <filename>    ->  dispays 5 line following match
+
+>grep -C 5 "text to search" <filename>    ->  dispays 5 line before and after the match line
+
+-----
+Find files containing Text where the files filtered on date
+
+>find ./ -mtime -xx -print0 | xargs -0  grep -l 'text'
+-l -> give only file list
+
+------------
+Show from line no to a line no in a file
+
+>head -to lineno  /var/lib/mysql/mtvc.log | tail -how many lines
+
+-----
+
+See available sudo commands
+
+>  sudo -l
+
+---------------------------
+find files or directory
+
+> find / -name '*.*' 2>/dev/null
+
+option 2>/dev/null - suppress permission denied warnings
+
+find directory -- -type d
+
+Find files older than x days, by date
+
+>find /path/to/files* -mtime +5
+
+Find with files details including modified date, file path, filesize etc
+
+>find /path/to/files* -printf '%t %p %k KB\n'
+
+See hidden files
+>ls -a
+
+List or Display files with File Size in MB, GB, KB
+>ls -h  -> use -h option
+
+List files/directory with Permissions in octol/Numeric values
+
+>stat -c "%a %n" ./Documents/Udev.html 
+With folders:
+>stat -c "%a %n" ./Documents/
+
+
+---------------------------
+
+
+Find or search a File containing particular text
+
+>grep "text" /folder/path/*.txt
+
+ -r -- for recursive
+
+
+-H -- For Only print filenames use "-H", By default prints the matching lines
+
+Find files of a type with a text string
+>find my_folder -type f -exec grep -l "needle text" {} \;
+
+--------
+
+Find files containing text
+
+> grep "text" /direcoty/*.txt
+
+--------
+Find files containing text in all subdirectories
+
+> grep -Rl "text" /directory/*.txt
+
+-------
+Find or Filter files and List with filename , size information etc.,
+
+>find ./ -name '*.ear' -exec ls -lh {} \;
+>find ./ -mtime+5 -exec ls -lh {} \;
+
+-------
+
+View war file or jar file
+
+> jar tvf filename.war
+
+Unzip war file or jar file
+
+> jar xvf filename.war
+
+
+----------------------------------
+svn file permissions
+
+For some reason the NFS share file permissions get "reset" and you cannot access the system.
+
+If this happens, login to mtc:
+
+Putty-> mtc.medtrac.com
+
+Make sure you login as root:
+
+# su -
+Password:  mJk7432hmpQvX
+
+Then cd to the SVN folder
+
+root # cd /mnt/data/cluster/svn
+
+Change the owner of the files
+
+>/mnt/data/cluster/svn # chown -R wwwrun.www *
+
+change owner and group
+
+> chown owner:group  file|direcotry
+
+
+This will fix the SVN file permissions.
+
+James
+------------------------------------------------
+svn
+
+
+cd /mnt/data/cluster/svn
+
+
+/mnt/data/cluster/svn # chown -R wwwrun.www *
+
+----------------------------------
+
+svn checkout https://mtc.medtrac.com/svn/manager/branches/VER2x4x0/
+
+
+------
+
+show all users
+
+cat /etc/passwd | cut -d: -f1
+
+----
+
+-----
+show all groups
+
+> cat /etc/group
+
+-----
+
+show current user groups
+
+> groups
+
+-------
+
+add group
+
+> groupadd 'groupname'
+
+------
+
+add user
+
+> useradd 'username'
+
+----
+
+set password
+
+> passwd 'username'
+
+-----
+
+add user to group
+
+> useradd -G {group-name} username
+
+-----
+
+find linux operating system distribution and version 
+
+$ cat /etc/*-release
+
+find 32bit or 64bit
+
+>getconf LONG_BIT 
+
+----
+
+ssh server start stop
+
+> /etc/init.d/ssh start|stop|restart
+
+
+-----
+
+
+ip address
+
+> ifconfig
+> ip addr show [eth0]
+
+---------------------------------------
+
+Get Folder size, disc usage
+
+>du -h --max-depth=1  (max-depth - level of subfolders, h - human readable )
+
+------
+Show available disk space across each drive.
+
+>df -h 
+
+-----
+Top 10 largest file/directories taking up the most space in a folder (shows in KB)
+       -a : Include all files, not just directories 
+
+> du -a /folder/path | sort -n -r | head -n 10
+-----
+
+Find total size of files by file type in all Subfolders (result in MB)
+
+>find ./ -iname "*.mp3" -type f -exec stat -c "%s" {} \; | awk '{SUM+=$0} END {print SUM/1024/1024}'
+
+
+-------------------------------------------
+
+Show all process
+
+> ps aux
+
+show with lines wrapped
+> ps auxww
+OR
+> ps aux | less -+S
+
+
+search for a process with name
+> pgrep <processname>
+> ps aux | grep <processname>
+
+-----
+
+mysql start
+
+$MYSQL_HOME/bin/mysqld_safe --defaults-file=$MYSQL_HOME/my.cnf --user=mysql &
+
+---
+
+Port process status checking
+
+> cat /etc/services | grep <portnumber>
+
+> netstat -anp | grep <portnumber>
+
+> nmap -sT -O localhost
+
+> lsof -i | grep <portnumber>
+
+>netstat -punta | grep ":portno "
+------
+List all Port status
+
+>netstat -lptu
+>netstat -tulpn
+
+-----
+
+clear ssh keys
+
+> sed -i '<key_linenumber>d' ~/.ssh/known_hosts
+example:
+> sed -i '8d' ~/.ssh/known_hosts
+
+------
+
+current working directory or folder
+
+> pwd  (means present working directory)
+
+---
+
+hosts file
+
+- /etc/hosts
+
+----
+
+show user information (groups, id)
+
+> id <username>
+
+> id -g <username>  --> show groupid
+
+> grep <username> /etc/passwd   --> show user home directory
+
+> echo $HOME --> show user home directory
+
+
+----
+
+
+server restart log entries
+
+see in  /var/log/messages file
+
+------------------------------
+
+create folder symbolic link - symlink
+
+> ln -s <destination> <linkname>
+
+-----
+
+copy symlink
+
+ln -s $(readlink -f /opt/medtrac/dhldev/tomcat/lib/mysql.jar) ./lib/mysql.jar
+
+-----
+
+list all symlink in the directory and its child directories
+
+ >find ./ -type l
+ 
+ OR
+ 
+ >ls -lR ./ | grep ^l
+
+
+--------------------------------
+
+create new file
+
+>cat > filename.txt
+
+type something, then Ctrl + D to end.
+
+----------------------------------
+Cron jobs
+
+Crontab command
+
+edit
+> crontab -e  
+  :wx to save and exit
+
+display cron jobs of the User
+> crontab -l -u<user>
+
+
+-- 
+see system data and time
+> date
+
+---
+
+see exact line in file
+
+>head -n <lineno> filename.txt | tail -n 1
+
+
+
+----
+
+svn checkout
+
+>svn checkout url to_foldername
+
+svn create repository
+
+>svnadmin create repository_name
+
+svn create trunk, tags, branches directories
+
+>svn mkdir file:///opt/cluster/svn/toho/trunk -m ""
+
+-----
+
+chmod or chown on filtered files in subdirectories
+
+> find folder/ -name 'filename.txt' -exec chmod 666 {} \;
+
+------
+
+List files by filter and look within subdirectories
+
+>find / -name "filename.txt" -ls
+
+----------
+sticky bit
+>chmod 1xxx  OR >chmod  +t  Or > chmod u+s 
+
+----
+Group setuid Or Set default group for all New files under a Directory
+
+>chmod +g OR >chmod g+s <dirname>
+
+-------
+
+go to last 2 visited directory
+
+> cd -
+
+or
+>pushd  directory
+>popd  -> take you to last directory
+
+
+-------------
+
+go to last shell
+
+>bash
+
+----------
+check the startup programs or process on system boot auto start
+
+>ntsysv
+
+
+
+----------------------
+see commands history and retrive
+>Ctrl + R
+then type search word
+then Enter
+
+-----------
+show history of commands
+
+>history | more
+
+select number
+>!<number>
+
+--------
+clear previous command history
+
+>history -c
+
+
+------------------------------------
+how to know computer name
+
+>hostname
+
+---------------------------
+
+find default gateway
+>ip rou
+
+look for 'default via'
+
+--------------------
+folder size
+
+>du -h   -> all sub folders
+
+>du -hd 2   -> one level of sub folders
+-------------------------
+Clear or delete current session command history
+
+>history -c
+
+First command clears the history, and the second writes the now (empty) history file.
+>history -c && history -w 
+
+-----
+
+directories, push the get pop paths on stack
+
+>pushd path_you_want_to_store
+>popd
+
+----------
+Command to List all Available Commands
+
+>compgen -c
+
+---------
+List Services or details of Service which will Start on System Starup (reboot)
+
+>ls -l /etc/rc?.d/*<servicename>
+
+------------------------------
+Managing Services startup on System start
+
+>chkconfig --list <servicename>
+>chkconfig --add <servicename>
+>chkconfig --del <servicename>
+>chkconfig <servicename> on | off              -> Enable/Disable service
+>chkconfig <servicename> on --level xx         -> Enable service
+>chkconfig <servicename> off --level xx        -> Disable service
+
+----------
+FTP
+
+ftp connect
+>ftp hostname
+
+ftp login
+ftp> user
+
+after connect
+ftp> help  -> list the commands
+
+see list of users under file:
+/etc/vsftpd/ftpusers
+
+--------
+FTP Server
+
+Check vsftpd server running
+>netstat -a | grep ftp
+
+------------------------------
+Email :
+
+   Linux default smtp - Sendmail server
+   Configuration files: /etc/mail/sendmail.mc, sendmail.cf
+   Log: /var/log/maillog
+   
+   Find what smtp server on machine
+   >telnet <hostname> 25
+   
+   Testing email command:
+   >sendmail -f servicedesk@supplychain.nhs.uk -t sarath.mukkukiran@sbdinc.com -u subject < abc.txt
+   Or
+   >sent email log with mail command
+   
+   Verbose debugging:
+   
+   >/usr/bin/sendmail -v sarath.mukku.kiran@aeroscout.com < testmail.txt
+   Or
+   >sendmail -v user_id@domain.com < /dev/null
+   
+
+-----------------------------
+
+
+
+------------------------------
+
+Restart xserver  Graphic (GNOME)
+>Control + Alt + Backspace
+>sudo restart gdm
+

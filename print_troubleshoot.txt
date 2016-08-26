@@ -1,0 +1,138 @@
+#############################################
+CUPS Port Number:  631
+
+CUPS Printers config file (edit and restart cups)
+
+/etc/cups/printers.conf
+-------
+Cups Log file
+
+>/var/log/cups/error_log
+
+Log files: /var/log/cups/
+
+----------
+Restart cups
+
+/sbin/service cups restart 
+
+--------
+Add or Edit Printers in cups
+
+>lpadmin -p name -v device
+
+Add printer:
+
+example:
+/usr/sbin/lpadmin -p RBH2 -E -v socket://193.61.118.163:9100
+ 
+--------
+Activate your printer on cups:
+
+>lpadmin -p <printer name>
+
+###########################################
+PRINT TO QUEUE
+
+lpr -r -P<Printername>
+
+lpr [-S ServerID] -P PrinterName [-J JobName] [{-o | -o l}] [-d] [-x] FileName
+
+-S ServerID : Specifies, by name or IP address
+-P PrinterName 
+-J JobName : Specifies the print job name that will be printed on the banner page
+{-o | -o l} : Specifies the type of file that you want to print. The parameter -o specifies that you want to print a text file. The parameter -o l specifies that you want to print a binary file (for example, a PostScript file).
+-d : Specifies that the data file must be sent before the control file
+-x : Specifies that the lpr command must be compatible with the Sun Microsystems operating system
+FileName : Required. Specifies, by name, the file to be printed. 
+
+
+lpr –S localhost –P printer –o l [filename]
+
+###############################
+CUPS statistics 
+
+>lpstat 
+
+check cups running
+
+> lpstat -r
+
+lpstat <options>
+    -t : show all CUPS info
+    -d : show default printer
+    -p : show all printers
+    -a : show all printers that accept jobs
+    -o : show active print jobs
+-------    
+Check cups printer status
+
+lpstat -p | grep <PrinterName>
+
+-------
+Check the Job status on a Printer
+
+>lpstat -W completed -l <printer_name>
+
+:should show 'queued for <Pinter_name>'
+
+############################################
+Query the Print server for pending jobs
+
+>lpq -Sserver -Pqueue_name
+
+>lpq -P<PrinterName>
+
+>lpq -a  ->list all jobs in queue for all Printers
+
+Linux:
+
+lpq -hserver -Pqueue_name
+
+-----
+
+Cancel all print jobs for a Printer on CUPS
+
+>cancel -d printer -a
+
+CANCEL PRINT JOBS
+
+>lprm -  -> delete all  user jobs
+
+>lprm <jobid>
+
+###########################################
+
+LPD setup on Windows 7:
+
+http://kb.linksys.com/Linksys/GetArticle.aspx?docid=46cc343ea7304fb0b338d71ae8d3c94b_Setting_up_LPR_Printing_on_Windows_Windows_7.xml&pid=80
+
+Port listen
+
+netstat -a  -> giving Port listen info
+
+netstat -p TCP -s IP
+
+Linux
+-------
+netstat --listen
+netstat -vatn     -> all tcp
+netstat -vaun     -> all udp
+
+
+>nmap -A 192.168.0.5/32 -p 23
+
+
+http://web02.medtrac.jp:631/
+
+>telnet host port
+
+
+ipp traffic
+
+> tcpdump -n -i p4p1 -U -s0 -w ipp.pcap port ipp
+
+
+
+ 
+ 

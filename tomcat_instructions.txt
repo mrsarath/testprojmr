@@ -1,0 +1,25 @@
+log rotation with Linux
+
+
+step1: edit the file '/etc/logrotate.d/tomcat6f
+
+step2: run command to excute log rogation manually
+
+       >/usr/sbin/logrotate /etc/logrotate.conf
+---------------------       
+       
+juli logging - config file : /tomcat/conf/logging.properties
+
+set rotatable :
+
+2localhost.org.apache.juli.FileHandler.rotatable = false
+
+--------------
+
+tomcat how to check version
+
+run command: >sh /tomcat/bin/version.sh
+
+before that execute >export JAVA_HOME=/usr/java/jdk1.6.0_18/jre (example)
+
+----------------

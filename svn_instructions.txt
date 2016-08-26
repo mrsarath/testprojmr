@@ -1,0 +1,31 @@
+
+>svn info
+
+-----
+
+>svn switch http://url
+
+----
+
+svn checkout
+
+>svn checkout url to_foldername
+
+------
+
+svn create repository
+
+>svnadmin create repository_name
+
+svn create trunk, tags, branches directories
+
+>svn mkdir file:///opt/cluster/svn/toho/trunk -m ""
+
+-----
+
+Get list of svn conflict files in Linux
+
+>svn status | grep -P '^(?=.{0,6}C)'
+
+---------------
+

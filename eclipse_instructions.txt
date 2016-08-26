@@ -1,0 +1,14 @@
+
+Increase Heap Memory Size
+
+eclipse.ini -Xmx1024m
+
+------
+View Line numbers
+
+-right click on the gutter in Text editor and enable line numbers
+
+-OR goto windows/preferences/General/Editors/TextEditor
+
+------------
+

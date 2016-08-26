@@ -1,0 +1,234 @@
+
+LANGUAGE BASICS
+
+1) If there is any private, final or static method in a class, there is static binding.
+
+2) Inner class can access outer class private method, when 
+
+3) Cannot override private methods
+
+4) Objects instances created in Heap, Method's local variables if it is primitive created on Thread stack , 
+   Method's local variable if it is Object type then Object created on Heap and reference created on Thread stack.
+   
+5) package-private is the default, means member can be accessed within Package.
+
+6) protected - means can be accessed within Package , or Subclass from even outside of the Package.
+    
+7) Transient variable - whose value is not Serialized during Serialization and initialized by its default value during de-serialization.
+
+8) Autoboxing - process of primitive types automatically encapsulated(boxed) equivalent type wrapper
+
+
+OVERRIDING: 
+5) Subclass method Access level cannot be more Restrictive than SuperClass method Access level. Example: 
+   Superclass method is Public then Subclass overriding method cannot be Private or Protected.
+
+6) On Overriding the Return type should be the Same or a Subtype of the return type declared in the original overridden method in the Superclass.
+
+INTERFACE
+
+7) In Interface All Abstract, Default, and Static Methods are implicitly Public. Only Public & Abstract methods are allowed (jdk 7).
+
+8) All Constant values defined in an interface are implicitly public, static, and final
+
+9) Interface can have only Public methods.
+
+10) Abstract classes can define Public or Protected Methods.
+
+11) When same Static Method in ParentClass defined in the Subclass it Hides the static method, Not override. 
+
+12) Class declared Final cannot be Subclassed.
+
+13) If Subclass doesnot implement all of the abstract methods of the Parent Abstract class should be declared as Abstract
+
+COLLECTIONS
+
+1) Maps
+   - both key, value are Obects
+   - Keys must be unique, Values can be duplicate
+   - Maps not Iterable - means Cannot cycle through with for-each, Or Iterator   
+   - You can get Collection-view (using entrySet()) of Map which allow for-each or iterate
+   - Maps revolve around get() and put()
+   
+   extra
+   - Do not implement Collection interface
+   - SortedMap maintain order based on Keys
+   - NavigableMap support retreival based on closest match
+   - 	
+2) HashMap 
+   - uses hash table
+   - Order is not guarantee in the Hashmap   
+   - Not synchronized
+   - Can have one null Key, and multiple null Values.
+   
+LinkedHashMap
+   - Use this if you want Order while Iteration
+   - prserve insertion order
+   
+   HashTable
+   - Main difference is Synchronized
+   - Legacy and reenginering for Collections
+   - once implemented Dictonary now changed to Map interface   
+   - Keys or Values cannot be Null
+   - Only store Objects which override the hashCode(), equals() methods
+   
+   extra
+   - not support Iterators
+   - use entrySet() or keySet() to iterate   
+   
+   Tree
+   - Key Objects must implement Comparable Interface
+   
+3) TreeMap
+
+   - use Tree structure, NavigableMap
+   - use Sorted order, allows Faster retreval
+   - ascending Key order
+   - can use Comparator for sorting
+   
+2) Lists 
+   - stores a sequence
+   - insert, access by their position
+   - can contain Duplicates
+   - null elements not allowed  **    
+   - use sort() to sort
+   - have ListIterator , which allow insert, replace. Bidirectional access.  
+   - classcastexception when object add not compatible   
+   - Caution on using List inside a List
+   
+3) ArrayList 
+   - are dynamically change the size, implements with resizing Array.
+   - Maintains insertion Order
+   - Fast for get(), Slow for Add, Remove as it need shifting all later elements O(n) 
+     Or resize and copy elements if not enough space
+   - Allow duplicate Values
+   - Allow multiple null Elements
+   - ensureCapacity() method to manually increase capacity
+   - trimToSize()  reduces size
+   - take All the space allocated regardless used or not
+   - autoboxing used to add primitive types like int, avoid wrap to Integer
+   - Iterating is equal for ArrayList, LinkedList
+   - To avoid high cost of resizing if you know going to add construct with high capacity
+   - Not synchronized, Not thread safe
+    
+   
+2) LinkedList
+   - implement List, Deque, Queue
+   - can use addFirst(), addLast(), peekFirst() etc.,
+   - Non synchronized
+   - Best when you reuse existing Iterator to Insert or Remove
+   - Seeking is slow because need follow links O(n)
+   
+3) Set
+    - unique elements
+	- Null not allowed in the set
+	
+4) HashSet
+    - hashset not guarantee Order
+	
+5) TreeSet
+    - Ordered and Sorted
+    - sorted in ascending order
+    - retreiving time is quite fast
+	
+4) Queue Interface	
+    - First-in, First-out
+	- Null elements not allowed
+	- Elemets can be removed only from the head of the queue
+	- poll() retreive and remove element
+	- peek() only retrieve, and at the head of queue
+	
+5) Dqueue (Double ended queue)
+    - 	FIFO or LIFO(stack)
+   
+- Vector
+  - mainly dynamic array - can grow
+  - synchronized (Thread safe)
+  - 
+   
+6) WHAT Collection to USE
+   - You want Insertion Order use List, or LinkedHashMap. List also have some util functions like Collections.shuffle.
+   - Want to store Duplicate Elements use List, or Map
+   - You want Sort, or Custom Sort use TreeSet, TreeMap
+   - Objects used as Keys-Of-Map, Items-In-Set recommended Immutable
+   - Add lot and need it sort and Order constantly all the time use  TreeSet or TreeMap
+   - B-Tree (TreeMap, TreeSet) best for Large data sets overall
+   - Linked Lists preferred when there are Lot of Insert, Deletes. Not good for Search
+   - Hash are good overall for small sets, Not preferred for Large sets
+   - ArrayList provide ListIterator to traverse in Both directions.
+   
+MULTI THREADING
+14) By default, every thread is given priority NORM_PRIORITY (a constant of 5).
+
+15) Class which need to be run as Thread must implement Runnable interface, and Override run() method.
+    Then  new Thread(RunnableClass obj, "ThreadName).start(); will run run() method.
+	
+I/O
+
+16) FileInputStream -> is Byte Input Stream  (8bit)
+    FileOutputStream -> is Byte Output Stream
+	
+	FileReader -> is Character Input Stream (2 bytes - 16bit character)
+	FileWriter -> is Character Output Stream (2 bytes - 16bit character)
+	
+    InputStreamReader -> Standard Streams, System In
+	
+EXCEPTIONS
+
+1) Base class of Error and Exception is Throwable.
+
+2) Checked Exceptions is some Subclass of Exception or Exception itself.
+
+3) For Check Exceptions must declared as Throws, and Client applications must deal with them.
+
+4) Unchecked Exceptions are RuntimeExceptions or subclass of it. Clients dont need to deal with them.
+
+INNER CLASS
+
+1) Inner classes have access to other Members of the Enclosing class, even if they are declared Private.
+
+2) Static nested classes do not have access to other members of the enclosing class.
+
+3) Outer classes can only be declared Public or package private.
+
+
+-------------------------------------------------------------
+  JAAS
+
+
+1)   
+
+
+
+
+#############################################################
+    SPRING FRAMEWORK
+#############################################################
+
+   MVC
+   
+ Request Flow
+ - DispacherServlet receive the Request
+ - Then DispatcherServlet consults the HandlerMapping to find the appropriate Controller and pass request to controller 
+ - Controller takes Request and calls appropriate Service Method
+ - Service Method set Model data based on Business Logic and returns ModelAndView object to DispatcherServlet
+ - Dispatcher Servlet take help from ViewResolver to pickup View
+ - DispatcherServlet pass the Model to View to prepare rendered result
+ 
+ - DispatcherServlet 
+          - search for WebApplicatinContext and add as attribute for request
+          - locale resolver, theme resolver, multipart file resolver bound to request
+		  - searched for handler and found then execute chain (preprocessor, postprocessor, controller) 
+		    to prepare model
+		  - exception Handlers pick up exceptions thrown in processing request
+		  
+ 
+ Tomcat web.xml - contains 
+    1) DispatcherServlet mapping, 
+	2) contextConfigLocation info related to Spring
+	3) creates ContextLoaderListener
+	4) if contextConfigLocation not specified, looks for /WEB-INF/<appname>-servlet.xml for bean configurations
+ 
+ WebApplicationContext - Contains Controllers, HandlerMapping, ViewResolver, 
+ 
+ 

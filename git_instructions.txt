@@ -1,0 +1,134 @@
+
+c:\opt\git>"c:\Program Files (x86)\Git\bin\git.exe" clone mtc_git:medtrac.git
+
+----------------
+
+CLONE
+
+ssh: >git clone git@bitbucket.org:stanleyhealthcare/repository_name.git
+
+https: >git clone https://username@hostname/url_path/repository_name.git
+
+
+Clone only one branch
+
+>git clone -b mybranch --single-branch git://sub.domain.com/repo.git
+
+
+---------------
+
+REVERT all modified files OR Discard local changes
+
+>git checkout -- *
+
+>git checkout /file/path
+
+---------
+DISCARD the local changes and update with remote 
+
+>git reset --hard
+
+-------------
+
+DIFF of a file
+
+>git diff filepath
+
+--------------
+COMMIT modified files without run add command
+
+>git commit -a
+
+Change Latest Commit message
+
+>git commit --amend -m "New commit message"
+
+---
+UNDO last Commits
+>git reset --soft HEAD~1  ->~n shows number of commits
+
+--------------
+LOG: See all recent Commits LOG from local repository
+>git log -n  ->n for number of commits
+
+----
+See commits not yet pushed
+
+git log --branches --not --remotes
+
+----------------
+
+See configuration
+
+>cd .git
+>ls
+
+---------
+
+>git pull -all
+
+----------------------
+BRANCH
+
+List all branches
+
+>git branch
+
+List all Remote branches
+>git branch -r
+
+Get a Branch from repository
+
+>git checkout develop
+
+>git pull origin <branch>
+
+---------------
+DELETE Branch
+
+Delete from Local
+>git branch -d <branchname>
+>git branch -D <branchname> -> for Force delete if not Merged
+
+Delete from Remote Branch and Delete Local copy of Remote Branch
+>git push origin --delete <branchname>
+
+Pruning the obsolete local remote-tracking branch
+>git fetch origin --prune
+
+----------
+Untrack a file
+
+git rm --cached 
+----------
+
+REMOTE URL: Change remote url to another location
+
+>git remote set-url origin url/xxxx.git
+
+------
+STASH: Move local changes temporarily to set aside, and get the fresh files from Remote
+>git stash
+
+See Stash list
+>git stash list
+-----
+Apply stashed changes
+>git stash apply stash@{number}
+
+Usual Stash usage:
+>git pull
+>git stash pop
+>git stash drop
+
+-----------
+Ignoring Files
+
+Create local .gitignore file, and commit into repository
+OR
+Run the command
+ - create file ~/.gitignore_global first
+>git config --global core.excludesfile ~/.gitignore_global
+
+--------------
+
